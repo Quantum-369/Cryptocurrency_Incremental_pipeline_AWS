@@ -1,58 +1,82 @@
-# Cryptocurrency_Incremental_pipeline_AWS
-This project focuses on cryptocurrency data analytics, leveraging AWS technologies to create a scalable, serverless ETL pipeline. We will extract data from Alpha Vantage, transform it using AWS Lambda, and load it into DynamoDB. Further analytics will be performed using Apache Flink, Apache Zeppelin, and Amazon Athena.
-Incremental ETL Pipeline for Cryptocurrency Data using AWS CDK
-What Will You Learn?
-Understanding the Cryptocurrency Dataset
-Grasp the basics of cryptocurrency and its market data.
-Explore how digital currencies like Bitcoin use cryptography for secure transactions.
-Understanding the Alpha Vantage API
-Learn to interact with Alpha Vantage's API for financial data.
-Fetch real-time and historical cryptocurrency market data.
-Understanding the AWS CDK
-Understand the AWS Cloud Development Kit (CDK) and its role in cloud infrastructure.
-Learn to define cloud resources in code and provision them using AWS CloudFormation.
-Installation of AWS CDK and its Various Commands
-Set up AWS CDK in your environment.
-Master essential AWS CDK commands for infrastructure deployment.
-Advantages of Serverless Technologies
-Discover the benefits of using serverless technologies in cloud computing.
-Learn how serverless can streamline operations and reduce costs.
-Creating an AWS Cloud9 Environment
-Learn to set up and use the AWS Cloud9 IDE for development.
-Understand how Cloud9 simplifies coding with a cloud-based editor.
-Creating Data Producers Lambda Stack
-Implement Lambda functions to fetch data from the Alpha Vantage API.
-Set up a pipeline to stream this data into AWS Kinesis.
-Creating Data Consumers Lambda Stack
-Develop Lambda functions to consume data from AWS Kinesis.
-Transform and load the data into AWS DynamoDB.
-Creating Kinesis Data Streams
-Set up Kinesis Data Streams to handle real-time data processing.
-Learn to manage high-throughput data streaming in AWS.
-Setting Up Environment Variables
-Configure and manage environment variables for your AWS setup.
-Ensure secure and efficient access to API keys and resources.
-Deployment of AWS CDK
-Deploy your AWS infrastructure using CDK.
-Learn to manage and update your cloud resources.
-Performing Data Analytics using Apache Flink and Apache Zeppelin
-Utilize Apache Flink for real-time data processing.
-Explore data with Apache Zeppelin for insightful analytics.
-Creating ETL Jobs using AWS Glue
-Implement AWS Glue for efficient ETL (Extract, Transform, Load) operations.
-Automate data preparation and loading processes.
-Performing Analysis using Amazon Athena
-Use Amazon Athena for interactive data querying.
-Analyze and visualize data stored in AWS DynamoDB.
-Project Description
-Business Overview
-This project focuses on cryptocurrency data analytics, leveraging AWS technologies to create a scalable, serverless ETL pipeline. We will extract data from Alpha Vantage, transform it using AWS Lambda, and load it into DynamoDB. Further analytics will be performed using Apache Flink, Apache Zeppelin, and Amazon Athena.
+# Incremental ETL Pipeline with AWS CDK 🚀
 
-Dataset Description
-Alpha Vantage provides a comprehensive suite of APIs for financial market data. This project utilizes their cryptocurrency data offerings, including real-time and historical data, technical indicators, and global market data.
+This project implements an incremental ETL (Extract, Transform, Load) pipeline for cryptocurrency data, leveraging the AWS Cloud Development Kit (CDK) to define and manage AWS infrastructure. The pipeline processes real-time cryptocurrency exchange rate data, storing and transforming it for analytics.
 
-Tech Stack
-Language: Python
-Services: AWS S3, Amazon Lambda, AWS Kinesis, Amazon Aurora, AWS Glue, Amazon Athena, Quicksight, AWS CDK
-AWS CDK
-The AWS Cloud Development Kit (CDK) is a powerful tool to define cloud infrastructure in familiar programming languages. It simplifies the deployment and management of AWS resources, enabling developers to focus on building robust applications.
+## 📋 Table of Contents
+
+1. [Project Overview](#project-overview)
+2. [Architecture](#architecture)
+3. [Services Used](#services-used)
+4. [Setup and Prerequisites](#setup-and-prerequisites)
+5. [Deployment](#deployment)
+6. [Usage](#usage)
+7. [Conclusion](#conclusion)
+
+## 📖 Project Overview
+
+This ETL pipeline gathers cryptocurrency data from an external API and streams it into an AWS Kinesis data stream. Lambda functions process and transform the data, which is then stored in DynamoDB and Amazon S3 for further analysis using Amazon Athena and QuickSight.
+
+## 🏗️ Architecture
+
+The pipeline architecture consists of the following components:
+
+- **Data Producer Lambda**: Fetches exchange rates from the Alpha Vantage API, and streams it to a Kinesis data stream.
+- **Kinesis Data Stream**: Manages the flow of real-time data.
+- **Data Consumer Lambda**: Consumes data from Kinesis, transforms it, and stores it in DynamoDB.
+- **DynamoDB**: Stores processed cryptocurrency data for analytics.
+- **AWS Glue and Athena**: Enables data querying and further analysis.
+- **S3**: Provides storage for processed data to support analytics in QuickSight.
+
+## 🛠️ Services Used
+
+- **AWS CDK**: Defines and provisions infrastructure using code.
+- **AWS Lambda**: Executes code for data production and consumption.
+- **Amazon Kinesis**: Manages data streaming.
+- **DynamoDB**: Stores transformed data.
+- **AWS Glue**: Manages ETL jobs.
+- **Amazon S3**: Stores data for analytics.
+- **Amazon Athena and QuickSight**: Provides data querying and visualization.
+
+## 🚀 Setup and Prerequisites
+
+1. **Install AWS CDK**: Ensure CDK is installed with:
+   ```bash
+   npm install -g aws-cdk
+   ```
+2. **AWS Account and CLI Configuration**: Set up an AWS account and configure AWS CLI with appropriate permissions.
+3. **Clone the Repository**: Clone this GitHub repository.
+4. **Install Python Dependencies**: Run the following to install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+## 🚀 Deployment
+
+1. **Bootstrap the AWS Environment**:
+   ```bash
+   cdk bootstrap
+   ```
+2. **Deploy the Stacks**:
+   Deploy all stacks defined in `app.py` using:
+   ```bash
+   cdk deploy --all
+   ```
+   This will set up resources like Kinesis streams, Lambda functions, DynamoDB tables, and S3 buckets.
+
+## 🚀 Usage
+
+### Running the Pipeline
+
+1. **Trigger Data Production**: The `DataProducerStack` Lambda function fetches and streams cryptocurrency data at scheduled intervals.
+2. **Data Processing**: The `DataConsumerStack` Lambda function processes incoming data and stores it in DynamoDB.
+3. **Query and Analyze Data**: Use AWS Glue and Athena to query and visualize the data stored in DynamoDB and S3.
+
+## 🔚 Conclusion
+
+This pipeline demonstrates the use of AWS serverless services and CDK for a scalable, real-time ETL solution. The project highlights the advantages of using infrastructure-as-code, enabling rapid setup and management of cloud resources.
+
+---
+
+<div align="center">
+Made with ❤️ by HarshaV
+</div>
